@@ -1,0 +1,2 @@
+# Only third-party import in enquiry_bot.py; standard-library modules need no installation.
+python-dotenv>=1.0,<2.0
