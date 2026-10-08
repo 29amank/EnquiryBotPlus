@@ -2,7 +2,7 @@
 
 A simple Python command-line enquiry bot. It asks for a customer's name, phone number, email address, and enquiry type; records the contact details in a local CSV; and sends the enquiry by SMTP email.
 
-> **Status:** Small demonstration project. It has not been independently tested or reviewed for production use. Treat captured contact details as personal data.
+> **Status:** Small demonstration project. It has only a small offline test suite and has not been reviewed for production use. Treat captured contact details as personal data.
 
 ## Requirements
 
@@ -57,11 +57,15 @@ python enquiry_bot.py
 - `.env` and `customer_details.csv` are ignored by Git through `.gitignore`; **do not commit real customer records or credentials**.
 - Restrict local access to the CSV file, get suitable consent to collect/share data, and define retention/deletion procedures before real use.
 - `.gitignore` only prevents *future untracked* files being added by default. If credentials or customer records were previously committed, remove them from history as appropriate and rotate exposed credentials.
-- This project has no current automated test suite; SMTP delivery, input handling, privacy, and error handling need further review before deployment.
+- Small offline tests now cover input validation, CSV storage, service lookup, and mocked SMTP calls; they do **not** verify real Gmail delivery, privacy requirements, or production reliability.
 
 ## Repository maintenance
 
-The repository contains the source file `enquiry_bot.py`, the dependency manifest, and a safe environment template. Add tests and improve configuration validation before expanding the application.
+The repository contains the source file `enquiry_bot.py`, a dependency manifest, a safe environment template, and offline tests. Improve configuration validation and integration tests before expanding the application.
+
+## Offline tests
+
+After installing the dependency, run `python -m unittest discover -s tests -p 'test_*.py' -v`. The SMTP dependency is mocked, so these tests do not send real messages. A GitHub Actions workflow also runs the same checks on proposed changes.
 
 ## License
 
